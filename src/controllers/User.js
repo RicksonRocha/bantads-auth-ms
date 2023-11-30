@@ -28,19 +28,21 @@ module.exports = {
     const user = await User.findOne({ email });
     if (!user) {
       res.status(400).json("Usuário não existe!!");
+    } else {
+      if (user.matchPassword(password)) {
+        res.status(200).json({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          type:  user.type,
+          token: generateToken(user._id),
+          userId: user.userId
+        });
+      } else {
+        res.status(400).json("E-mail ou senha inválidos");
+      }
     }
 
-    if (await user.matchPassword(password)) {
-      res.status(200).json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        type:  user.type,
-        token: generateToken(user._id),
-      });
-    } else {
-      res.status(400).json("E-mail ou senha inválidos");
-    }
   },
 
   async update(req, res) {

@@ -19,12 +19,13 @@ const connectAMQP = async () => {
         channel.consume(queueNameRead, async (message) => {
           if (message !== null) {
             const data = JSON.parse(message.content.toString());
-            const { name, email, password } = data;
+            const { id, name, email, password } = data;
             const user = await User.create({
+                userId: id,
                 name,
                 email,                    
                 password,
-                type: 'customer'
+                type: 'client'
             });
                 
             channel.ack(message);
