@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema(
     },
     email: {
       type: String,
-      unique: true,
+      // unique: true,
       required: "Email address is required",
       match: /.+\@.+\..+/
     },

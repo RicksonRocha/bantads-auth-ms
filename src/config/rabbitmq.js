@@ -28,8 +28,8 @@ const connectAMQP = async () => {
             });
                 
             channel.ack(message);
-            channel.sendToQueue(queueNameWriter, message.content);
           }
+          channel.sendToQueue(queueNameWriter, message.content);
         });
 
 
