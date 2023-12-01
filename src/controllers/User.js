@@ -29,7 +29,7 @@ module.exports = {
     if (!user) {
       res.status(400).json("Usuário não existe!!");
     } else {
-      if (user.matchPassword(password)) {
+      if (await user.matchPassword(password)) {
         res.status(200).json({
           _id: user._id,
           name: user.name,
